@@ -9,26 +9,19 @@ const Current = props => {
   } else if (props.state.loading === "loading") {
     return <Segment className="teal inverted compact loading" />;
   }
-  const time = new Date(props.state.currently.time * 1000);
+  const time = new Date(props.state.data.currently.time * 1000);
   // Skycon expect upper case with underscores, rather than dashes
-  const icon = props.state.currently.icon
-    .toLocaleUpperCase()
-    .replace(/-/g, "_");
+  const icon = props.state.data.currently.icon.toLocaleUpperCase().replace(/-/g, "_");
   return (
-    <Segment className={`teal inverted compact ${props.state.loading}`}>
+    <Segment className="teal inverted compact">
       <div className="item">
-        <Skycons
-          style={{ width: 128 }}
-          color="gold"
-          icon={icon}
-          autoplay
-        />
+        <Skycons style={{ width: 128 }} color="gold" icon={icon} autoplay />
       </div>
 
       <div>Date: {time.toLocaleDateString()}</div>
       <div>Time:{time.toLocaleTimeString()}</div>
-      <div>Currently: {props.state.currently.summary}</div>
-      <div>Temperature: {props.state.currently.temperature} &#8457;</div>
+      <div>Currently: {props.state.data.currently.summary}</div>
+      <div>Temperature: {props.state.data.currently.temperature} &#8457;</div>
       <h2>Current Conditions</h2>
     </Segment>
   );

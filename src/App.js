@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import UserInput from "./components/UserInput";
 import darksky from "./api/darksky";
 import Current from "./components/Current";
+import Forecast from "./components/Forecast";
 //import "./App.css";
 
 class App extends Component {
-  state = { currently: null, loading: null };
+  state = { data: null, loading: null };
   onUserInputSubmit = async ({ lat, long }) => {
     this.setState({ loading: "loading" });
     const response = await darksky.get(`/${lat},${long}`);
-    //console.log(response);
-    this.setState({ currently: response.data.currently, loading: "done" });
+    console.log(response.data);
+    this.setState({ data: response.data, loading: "done" });
   };
 
   render() {
@@ -18,6 +19,10 @@ class App extends Component {
       <div>
         <UserInput onUserInputSubmit={this.onUserInputSubmit} />
         <Current state={this.state} />
+        <Forecast
+          data={this.state.data}
+          loading={this.state.loading}
+        />
       </div>
     );
   }
