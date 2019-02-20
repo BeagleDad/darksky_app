@@ -1,7 +1,6 @@
 import React from "react";
 import { Segment } from "semantic-ui-react";
 import Skycons from "react-skycons";
-import "../App.css";
 
 const Future = ({ data, loading }) => {
   if (!loading) {

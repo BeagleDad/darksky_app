@@ -1,17 +1,18 @@
 import React from "react";
 import { Segment } from "semantic-ui-react";
 import Skycons from "react-skycons";
-import "../App.css";
 
 const Current = props => {
   if (!props.state.loading) {
     return <div />;
-  } else if (props.state.loading === "loading") {
+  }/*  else if (props.state.loading === "loading") {
     return <Segment className="teal inverted compact loading" />;
-  }
+  } */
   const time = new Date(props.state.data.currently.time * 1000);
   // Skycon expect upper case with underscores, rather than dashes
-  const icon = props.state.data.currently.icon.toLocaleUpperCase().replace(/-/g, "_");
+  const icon = props.state.data.currently.icon
+    .toLocaleUpperCase()
+    .replace(/-/g, "_");
   return (
     <Segment className="teal inverted compact">
       <div className="item">
