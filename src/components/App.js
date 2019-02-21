@@ -16,18 +16,14 @@ class App extends Component {
     return (
       <div>
         <UserInput onUserInputSubmit={this.props.fetchForecast} />
-        <Current state={this.props.data} />
-        <Forecast data={this.props.data} loading={this.props.loading} />
+        <Current  />
+        <Forecast />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return { data: state.forecastData, loading: state.loading };
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   { fetchForecast }
 )(App);

@@ -1,9 +1,8 @@
-import { FETCH_FORECAST } from "./types";
+import { FETCH_FORECAST, FETCH_STARTED } from "./types";
 import darksky from "../api/darksky";
 
-export const fetchForecast = () => async dispatch => {
-  const lat = 38.434292;
-  const long = -122.662107;
+export const fetchForecast = ({ lat, long }) => async dispatch => {
+  dispatch({ type: FETCH_STARTED });
   const response = await darksky.get(`/${lat},${long}`);
   //console.log(response.data);
   dispatch({ type: FETCH_FORECAST, payload: response.data });

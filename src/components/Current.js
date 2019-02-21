@@ -1,16 +1,18 @@
+import { connect } from "react-redux";
 import React from "react";
 import { Segment } from "semantic-ui-react";
 import Skycons from "react-skycons";
 
 const Current = props => {
-  if (!props.state.loading) {
-    return <div />;
-  }/*  else if (props.state.loading === "loading") {
+  console.log(props);
+  if (props.loading) {
+    return <div>Current loading...</div>;
+  } /*  else if (props.state.loading === "loading") {
     return <Segment className="teal inverted compact loading" />;
   } */
-  const time = new Date(props.state.data.currently.time * 1000);
+  const time = new Date(props.data.currently.time * 1000);
   // Skycon expect upper case with underscores, rather than dashes
-  const icon = props.state.data.currently.icon
+  const icon = props.data.currently.icon
     .toLocaleUpperCase()
     .replace(/-/g, "_");
   return (
@@ -21,11 +23,14 @@ const Current = props => {
 
       <div>Date: {time.toLocaleDateString()}</div>
       <div>Time:{time.toLocaleTimeString()}</div>
-      <div>Currently: {props.state.data.currently.summary}</div>
-      <div>Temperature: {props.state.data.currently.temperature} &#8457;</div>
+      <div>Currently: {props.data.currently.summary}</div>
+      <div>Temperature: {props.data.currently.temperature} &#8457;</div>
       <h2>Current Conditions</h2>
     </Segment>
   );
 };
+const mapStateToProps = state => {
+  return { data: state.forecastData, loading: state.loading };
+};
 
-export default Current;
+export default connect(mapStateToProps)(Current);
